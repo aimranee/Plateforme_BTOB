@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Demande|{{demande.titre}}{% endblock %}
+
+{% block body %}
+<br>
+<div class="container">
+<!-- Dashboard Headline -->
+<div class="dashboard-headline">
+    <h3>{{demande.titre}}</h3>
+    <!-- Breadcrumbs -->
+    <nav id="breadcrumbs" class="dark">
+        <ul>
+            <li><a href="#">Acceuil</a></li>
+            <li><a href="#">Demandes</a></li>
+            <li>Demande</li>
+        </ul>
+    </nav>
+</div>
+<!-- Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-xl-12">
+
+            <a href="{{ path('demandeChangeEtat', {'idDemande': demande.id ,'etat': 'Approuver' })}}" class="button ripple-effect button-sliding-icon">Approuver <i class="icon-feather-check"></i></a>
+            <a href="{{ path('demandeChangeEtat', {'idDemande': demande.id ,'etat': 'Refuser' })}}" class="button gray ripple-effect button-sliding-icon">Réfuser <i class="icon-material-outline-highlight-off"></i></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="section-headline border-top padding-top-45 margin-bottom-25">
+                <h4>Description</h4>
+            </div>
+            <p>{{ demande.description|raw}}</p>
+        </div>
+    </div>
+
+    <div class="single-page-section">
+        <h3>Attachments</h3>
+        {% for attachement in demande.attachementDemandes %}
+        <div class="attachments-container">
+        <a href="{{ asset('uploads/attachementDemande/' ~ attachement.libelle) }}" class="attachment-box ripple-effect" download><span>Cliquer pour télécharger</span><i>PDF</i></a>
+    </div>
+    {% endfor %}
+</div> 
+</div>
+</div>
+<!-- Row / End -->
+{% endblock %}

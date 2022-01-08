@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<!-- Dashboard Content
+							================================================== -->
+	<div class="dashboard-content-inner" >
+		<div class="dashboard-headline">
+			<h3>Créer votre entreprise</h3>
+
+			<!-- Breadcrumbs -->
+			<nav id="breadcrumbs" class="dark">
+				<ul>
+					<li>
+						<a href="#">Acceuil</a>
+					</li>
+					<li>
+						<a href="#">Profile</a>
+					</li>
+					<li>Créer</li>
+				</ul>
+			</nav>
+		</div>
+
+		<!-- Row -->
+		{# <div class="row"> #}
+
+			<!-- Dashboard Box -->
+			<div class="col-xl-5 offset-xl-3">
+				<form action="{{ path('afficherNationalite',{'idN': idN })}}" method="POST" enctype="multipart/form-data">
+					<div
+						class="dashboard-box margin-top-0">
+
+						<!-- Headline -->
+						<div class="headline">
+							<h3>
+								<i class="icon-feather-folder-plus"></i>
+								Informations générales de l'entreprise</h3>
+						</div>
+
+						<div class="content with-padding padding-bottom-10">
+
+							<div class="col-xl-12">
+								<div class="submit-field">
+									<h5>SIREN</h5>
+									<input type="text" pattern="[\d]{9}" title"Le SIREN se compose de 9 chiffres" class="with-border" name="siren" placeholder="Ex: 552 100 554" required/>
+								</div>
+							</div>
+
+							<div class="col-xl-12">
+								<div class="submit-field">
+									<h5>SIRET</h5>
+									<input type="text" pattern="[\d]{14}" title"Le SIRET se compose de 14 chiffres" class="with-border" name="siret" placeholder="SIREN + NIC" required/>
+								</div>
+							</div>
+
+							<div class="col-xl-12">
+								<div class="submit-field">
+									<h5>Matriculation</h5>
+									<input type="text" class="with-border" name="matriculation" placeholder="Matriculation" required/>
+								</div>
+							</div>
+
+							<div class="col-xl-12">
+								<div class="submit-field">
+									<h5>numéro de TVA</h5>
+									<input type="text" class="with-border" name="numTVA" placeholder="Matriculation" required/>
+								</div>
+							</div>
+
+							<div class="col-xl-12">
+								<div class="submit-field">
+									<h5>Capital</h5>
+									<input type="text" pattern="\d+" class="with-border" name="capital" placeholder="EURO" required/>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<button class="button ripple-effect big margin-top-30" type="submit" type="submit">Valider
+						<i class="icon-material-outline-arrow-right-alt"></i>
+					</button>
+				</form>
+			</div>
+		{# </div> #}
+	</div>
+<!-- Spacer -->
+<div class="margin-top-70"></div>
+<!-- Spacer / End-->{% endblock %}

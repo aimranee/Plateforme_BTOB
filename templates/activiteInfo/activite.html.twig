@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+		<div class="dashboard-content-inner" >
+            <div class="dashboard-headline">
+                <h3>Créer votre entreprise</h3>
+
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs" class="dark">
+                    <ul>
+                        <li>
+                            <a href="#">Acceuil</a>
+                        </li>
+                        <li>
+                            <a href="#">Profile</a>
+                        </li>
+                        <li>
+                            Créer
+                        </li> 
+                    </ul>
+                </nav>
+            </div>
+            <form action="{{ path('creerActivite',{'idma': id,'idN': idN })}} " method="POST" enctype="multipart/form-data"/>
+            <div class="row">
+				<div class="col-xl-6 offset-xl-3">
+					<div id="test1" class="dashboard-box">
+
+						<!-- Headline -->
+						<div class="headline">
+							<h3><i class="icon-feather-folder-plus"></i> Activites & Catégories</h3>
+						</div>
+
+						<div class="content with-padding">
+
+                            <div class="payment margin-top-30">
+                                
+                                {% for activite in activites %}
+        
+                                <div class="payment-tab payment-tab">
+                                    <div class="payment-tab-trigger">
+                                        <input type="checkbox" name="activiteId[]" value="{{activite.id}}" id="{{activite.abreviation}}" >
+                                        <label for="{{activite.abreviation}}"><span class="checkbox-icon"></span> {{activite.abreviation}} : {{activite.libelle}} </label>
+                                    </div>
+
+                                    <div class="payment-tab-content">
+                                        <div class="sidebar-widget">
+                                            <div class="margin-top-30"></div>
+                                            <h3>Catégories</h3>
+
+                                            <div class="tags-container">
+                                                {% for categorie in categories %}
+
+                                                    {% if categorie.activite.id == activite.id %}
+                                                        <div class="tag">
+                                                            <input type="checkbox" name="categorie[]" id="{{categorie.libelle}}" value="{{categorie.id}}"/>
+                                                            <label for="{{categorie.libelle}}">{{categorie.libelle}}</label>
+                                                        </div>
+                                                    {% endif %}
+
+                                                {% endfor %}
+                                                
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {% endfor %}
+
+                                
+                            </div>
+                            
+	                    </div>
+		            </div>
+                    <button class="button ripple-effect big margin-top-30" type="submit" type="submit">Valider
+						<i class="icon-material-outline-arrow-right-alt"></i>
+					</button>
+		        </div>
+            </div>
+        </form>
+    </div> <div class="margin-top-70"></div>
+</div>
+   
+{% endblock %}

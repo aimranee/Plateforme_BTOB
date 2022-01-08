@@ -1,0 +1,131 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+<!-- Titlebar
+================================================== -->
+<div id="titlebar" class="gradient">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Inscription</h2>
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs" class="dark">
+                    <ul>
+                        <li><a href="#">Acceuil</a></li>
+                        <li>Inscription</li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Wrapper -->
+	<!-- Page Content	================================================== -->
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-5 offset-xl-3">
+			
+
+				<div class="login-register-page">
+					<!-- Welcome Text -->
+					<div class="welcome-text">
+						<h3 style="font-size: 26px;">Créer votre compte!</h3>
+						<span>Vous avez déjà un compte?
+							<a href="{{ path('app_login') }}">connexion!</a>
+						</span>
+					</div>
+					{% for message in app.flashes('erreur') %}
+						<div class="notification error closeable">
+							<p>{{ message }}</p>
+							<a class="close" href="#"></a>
+						</div>
+					{% endfor %}
+					
+					<!-- Form -->
+					
+					{# {% for utilisateur in utilisateurs %} #}
+					<form action="{{ path('registre') }}" method="POST">
+						<div class="input-with-icon-left">
+							<i class="icon-material-outline-supervisor-account"></i>
+							<input type="text" name="nom" placeholder="Nom" required/>
+						</div>
+						<div class="input-with-icon-left">
+							<i class="icon-feather-user"></i>
+							<input type="text" name="prenom" placeholder="Prénom" required/>
+						</div>
+						<div class="input-with-icon-left">
+							<select id="selectid" name="post" required/>
+								<option>Admin Support</option>
+								<option>Customer Service</option>
+								<option>Data Analytics</option>
+								<option>Design & Creative</option>
+								<option>Legal</option>
+								<option>Software Developing</option>
+								<option>IT & Networking</option>
+								<option>Writing</option>
+								<option>Translation</option>
+								<option>Sales & Marketing</option>
+								<option>Autre</option>
+							</select>
+							<i class="icon-material-outline-business-center"></i>
+						</div>
+						<div class="input-with-icon-left">
+							<i class="icon-material-baseline-mail-outline"></i>
+							<input type="email" name="email" placeholder="Adresse E-mail" required/>
+						</div>
+						<div class="input-with-icon-left" title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus" data-tippy-placement="bottom">
+							<i class="icon-material-outline-lock"></i>
+							<input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  title="Doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus"  name="password" placeholder="Mot de passe" id="myInput" required/>
+							<span class="password-icon-eye" onclick="myFunction()">
+								<i id="hide1" class="icon-feather-eye"></i>
+								<i id="hide2" class="icon-feather-eye-off"></i>
+							</span>
+						</div>
+						<button class="button full-width button-sliding-icon ripple-effect margin-top-10" type="submit">S'inscrire
+							<i class="icon-material-outline-arrow-right-alt"></i>
+						</button>
+					</form>
+					{# {% else %}
+					<div class="col-xl-12 col-md-12">
+					<div class="section-headline margin-bottom-30">
+						<h4></h4>
+					</div>
+					<div class="notification warning closeable">
+						<p>Désolé, il n'y a aucune résultat correpondant à cette combinaison de filtres. <a href="{{ path('registre') }}" class="button ripple-effect" style="text-decoration:none;">Réinitialiser le filtre</a></p>
+						<a class="close" href="#"></a>
+						
+						<br>
+					</div>
+					</div>
+					{% endfor %} #}
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Spacer -->
+	<div class="margin-top-70"></div>
+	<!-- Spacer / End-->
+	</div>
+<!-- Wrapper / End -->
+<!-- ICON SCRIPT -->
+<script>
+	function myFunction() {
+var x = document.getElementById("myInput");
+var y = document.getElementById("hide1");
+var z = document.getElementById("hide2");
+
+if (x.type === 'password') {
+x.type = "text";
+y.style.display = "block";
+z.style.display = "none";
+} else {
+x.type = "password";
+y.style.display = "none";
+z.style.display = "block";
+}
+}
+</script>{% endblock %}

@@ -1,0 +1,376 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Préstations{% endblock %}
+
+{% block body %}
+<style>
+    .autocomplete {
+  /*the container must be positioned relative:*/
+  position: relative;
+  display: inline-block;
+}
+
+input[type=text] {
+  background-color: #fff;
+}
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+.autocomplete-items div:hover {
+  /*when hovering an item:*/
+  background-color: #e9e9e9;
+}
+.autocomplete-active {
+  /*when navigating through the items using the arrow keys:*/
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+</style>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+<!-- Page Content
+================================================== -->
+<div class="full-page-container">
+
+    <div class="full-page-sidebar">
+        <div class="full-page-sidebar-inner" data-simplebar>
+            <div class="sidebar-container">
+                <form action="{{path('filtrerPrestations')}}" method="POST" enctype="multipart/form-data">
+                <!-- Entreprise -->
+                <div class="sidebar-widget">
+                    <h3>Entreprise</h3>
+                    <div class="input-with-icon">
+                        <div id="autocomplete-container" class="autocomplete" >
+
+                          <input id="myInput" value="{{ nomEntrerprise }}" type="text" name="nomEntrerprise"  placeholder="Ex : MarrakechTelecom">
+                        </div>
+                        <!-- <i class="icon-material-outline-business-center"></i> -->
+                        <!-- <div id="autocomplete-container">
+                            <input id="EntrepriseInput" type="text" placeholder="Ex ,Marrakech telecom">
+                        </div>
+                        <i class="icon-material-outline-business-center"></i> -->
+                    </div>
+                </div>
+ 
+                <!-- Category -->
+                <div class="sidebar-widget">
+                    <h3>Activités</h3>
+                    
+                    <select class="selectpicker" name="activite" data-selected-text-format="count" data-size="7" title="toutes les activités" >
+                      {% for activite in activites %}
+                        <option value="{{activite.id}}">({{activite. abreviation}}) {{activite.libelle}}</option>
+                      {% endfor %}
+                    </select>
+                </div>
+                <div class="sidebar-widget">
+                    <button class="button ripple-effect">Rechercher</button>
+                </div>
+                </form>
+                <!-- Keywords -->
+                <!-- <div class="sidebar-widget">
+                    <h3>Keywords</h3>
+                    <div class="keywords-container">
+                        <div class="keyword-input-container">
+                            <input type="text" class="keyword-input" placeholder="e.g. task title"/>
+                            <button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
+                        </div>
+                        <div class="keywords-list"></div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div> -->
+
+                <!-- Budget -->
+                <!-- <div class="sidebar-widget">
+                    <h3>Fixed Price</h3>
+                    <div class="margin-top-55"></div>
+
+                    <input class="range-slider" type="text" value="" data-slider-currency="$" data-slider-min="10" data-slider-max="2500" data-slider-step="25" data-slider-value="[50,2500]"/>
+                </div>
+ -->
+                <!-- Hourly Rate -->
+                <!-- <div class="sidebar-widget">
+                    <h3>Hourly Rate</h3>
+                    <div class="margin-top-55"></div>
+
+                    <input class="range-slider" type="text" value="" data-slider-currency="$" data-slider-min="10" data-slider-max="150" data-slider-step="5" data-slider-value="[10,200]"/>
+                </div>
+ -->
+                <!-- Tags -->
+                <!-- <div class="sidebar-widget">
+                    <h3>Skills</h3>
+
+                    <div class="tags-container">
+                        <div class="tag">
+                            <input type="checkbox" id="tag1"/>
+                            <label for="tag1">front-end dev</label>
+                        </div>
+                        <div class="tag">
+                            <input type="checkbox" id="tag2"/>
+                            <label for="tag2">angular</label>
+                        </div>
+                        <div class="tag">
+                            <input type="checkbox" id="tag3"/>
+                            <label for="tag3">react</label>
+                        </div>
+                        <div class="tag">
+                            <input type="checkbox" id="tag4"/>
+                            <label for="tag4">vue js</label>
+                        </div>
+                        <div class="tag">
+                            <input type="checkbox" id="tag5"/>
+                            <label for="tag5">web apps</label>
+                        </div>
+                        <div class="tag">
+                            <input type="checkbox" id="tag6"/>
+                            <label for="tag6">design</label>
+                        </div>
+                        <div class="tag">
+                            <input type="checkbox" id="tag7"/>
+                            <label for="tag7">wordpress</label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="keywords-container margin-top-20">
+                        <div class="keyword-input-container">
+                            <input type="text" class="keyword-input" placeholder="add more skills"/>
+                            <button class="keyword-input-button ripple-effect"><i class="icon-material-outline-add"></i></button>
+                        </div>
+                        <div class="keywords-list"></div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div> -->
+                
+                <div class="clearfix"></div>
+
+                <div class="margin-bottom-40"></div>
+
+            </div>
+            <!-- Sidebar Container / End -->
+
+            <!-- Search Button -->
+            <!-- <div class="sidebar-search-button-container">
+                <button class="button ripple-effect">Search</button>
+            </div> -->
+            <!-- Search Button / End-->
+
+        </div>
+    </div>
+    <!-- Full Page Sidebar / End -->
+    
+    <!-- Full Page Content -->
+    <div class="full-page-content-container" data-simplebar>
+        <div class="full-page-content-inner">
+            <div class="dashboard-headline">
+                <h3>Prestations</h3>
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs" class="dark">
+                    <ul>
+                        <li><a href="#">Acceuil</a></li>
+                        <li>Trouver une prestation</li>
+                    </ul>
+                </nav>
+            </div>
+            <!-- <div class="notify-box margin-top-15">
+                <div class="switch-container">
+                    <label class="switch"><input type="checkbox"><span class="switch-button"></span><span class="switch-text">Turn on email alerts for this search</span></label>
+                </div>
+
+                <div class="sort-by">
+                    <span>Sort by:</span>
+                    <select class="selectpicker hide-tick">
+                        <option>Relevance</option>
+                        <option>Newest</option>
+                        <option>Oldest</option>
+                        <option>Random</option>
+                    </select>
+                </div>
+            </div>
+ -->
+            <!-- Tasks Container -->
+            <div class="tasks-list-container tasks-grid-layout margin-top-35">
+                
+                <!-- Task -->
+                {% for prestation in prestations %}
+                <a href="{{ path('prestationAfficherDetails', {'idprestation': prestation.id })}}" class="task-listing">
+
+                    <!-- Job Listing Details -->
+                    <div class="task-listing-details">
+
+                        <!-- Details -->
+                        <div class="task-listing-description">
+                            <h3 class="task-listing-title">{{ prestation.titre }}</h3>
+                            <ul class="task-icons">
+                                <li><i class="icon-material-outline-business-center"></i> {{ prestation.entreprise.nom }}</li>
+                                <li><i class="icon-material-outline-access-time"></i> {{ prestation.createdAt|ago }}</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div class="task-listing-bid">
+                        <div class="task-listing-bid-inner">
+                            <div class="task-offers">
+                                <strong>{{ prestation.prixmin|format_currency('EUR') }} - {{ prestation.prixmax|format_currency('EUR') }}</strong>
+                                <span>Budget</span>
+                            </div>
+                            <span class="button button-sliding-icon ripple-effect">Détails <i class="icon-material-outline-arrow-right-alt"></i></span>
+                        </div>
+                    </div>
+                </a>
+                {% else %}
+                <div class="col-xl-12 col-md-12">
+                  <div class="section-headline margin-bottom-30">
+                    <h4></h4>
+                  </div>
+                  <div class="notification warning closeable">
+                    <p>Désolé, il n'y a aucune résultat correpondant à cette combinaison de filtres. <a href="{{ path('toutesprestations') }}" class="button ripple-effect" style="text-decoration:none;">Réinitialiser le filtre</a></p>
+                    <a class="close" href="#"></a>
+                    
+                    <br>
+                  </div>
+                </div>
+                {% endfor %}
+            </div>
+            <!-- Tasks Container / End -->
+
+            <!-- Pagination -->
+            <!-- <div class="clearfix"></div>
+            <div class="pagination-container margin-top-20 margin-bottom-20">
+                <nav class="pagination">
+                    <ul>
+                        <li class="pagination-arrow"><a href="#" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-left"></i></a></li>
+                        <li><a href="#" class="ripple-effect">1</a></li>
+                        <li><a href="#" class="ripple-effect current-page">2</a></li>
+                        <li><a href="#" class="ripple-effect">3</a></li>
+                        <li><a href="#" class="ripple-effect">4</a></li>
+                        <li class="pagination-arrow"><a href="#" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-right"></i></a></li>
+                    </ul>
+                </nav>
+            </div> -->
+            <div class="clearfix"></div>
+          </div></div></div></div>
+            <!-- Pagination / End -->
+<script>
+var entreprises = [];
+{% for entreprise in entreprises %}
+    entreprises.push('{{entreprise.nom}}');
+{% endfor %}
+</script>
+<script>
+    function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+              b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+      x[i].parentNode.removeChild(x[i]);
+    }
+  }
+}
+/*execute a function when someone clicks in the document:*/
+document.addEventListener("click", function (e) {
+    closeAllLists(e.target);
+});
+}
+</script>
+<script>
+autocomplete(document.getElementById("myInput"), entreprises);
+</script>
+{% endblock %}

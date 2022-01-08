@@ -1,0 +1,191 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="dashboard-content-inner">
+
+		<!-- Dashboard Headline -->
+		<div class="dashboard-headline">
+			<h3>Créer votre entreprise</h3>
+
+			<!-- Breadcrumbs -->
+			<nav id="breadcrumbs" class="dark">
+				<ul>
+					<li>
+						<a href="#">Acceuil</a>
+					</li>
+					<li>
+						<a href="#">Profile</a>
+					</li>
+					<li>
+						Créer
+					</li>
+				</ul>
+			</nav>
+		</div>
+
+		<div class="col-xl-8 offset-xl-2">
+		
+			<div class="dashboard-box main-box-in-row">
+				{% for message in app.flashes('erreur') %}
+					<div class="notification error closeable">
+						<p>{{ message }}</p>
+						<a class="close" href="#"></a>
+					</div>
+				{% endfor %}
+				<div class="headline">
+					<h3>
+						<i class="icon-material-outline-note-add"></i>
+						Contacts des responsables de l'entreprise</h3>
+				</div>
+
+				<div class="content with-padding">
+					<!-- Note -->
+					{% for contact in entreprise.contacts %}
+						<div class="dashboard-note">
+
+							<!-- Job Listing Details -->
+							<div class="job-listing with-apply-button">
+
+								<!-- Details -->
+								<div class="job-listing-description">
+									<h3 class="job-listing-title">{{contact.responsable | upper}}</h3>
+
+									<!-- Job Listing Footer -->
+									<div class="job-listing-footer">
+										<ul>
+											<li>
+												<i class="icon-feather-phone"></i>
+												{{contact.telephone}}
+												{% if contact.telephone2 != NULL %}
+													/ {{contact.telephone2}}
+												{% endif %}
+											</li>
+											<li>
+												<div class="margin-left-20"></div>
+											</li>
+											<li>
+												<i class="icon-material-baseline-mail-outline"></i>
+												{{contact.email}}
+											</li>
+											<li>
+												<div class="margin-left-20"></div>
+											</li>
+											<li>
+												<i class="icon-material-outline-business-center"></i>
+												{{contact.post}}
+											</li>
+											
+										</ul>
+									</div>
+								</div>
+								<div class="note-buttons">
+									<a href="{{ path('contactDelet', {"idN": idN, "id": contact.id}) }}" title="Supprimer" data-tippy-placement="top">
+										<i class="icon-feather-trash-2"></i>
+									</a>
+								</div>
+
+							</div>
+
+						</div>
+					{% endfor %}
+					
+				</div>
+				<div class="add-note-button">
+					<button href="#small-dialog" class="popup-with-zoom-anim button full-width button-sliding-icon">Ajouter un contact
+						<i class="icon-material-outline-arrow-right-alt"></i>
+					</button>
+				</div>
+
+			</div>
+ 
+			<a href="{{ path('pageSuivant',{'idN': idN }) }}"> <button class="button ripple-effect big margin-top-20">Valider
+				<i class="icon-material-outline-arrow-right-alt"></i>
+			</button></a>
+
+		</div>
+	</div>	
+</div>
+
+<!-- Dashboard Box / End -->
+<!-- Apply for a job popup
+					================================================== -->
+<div id="small-dialog" class="zoom-anim-dialog mfp-hide dialog-with-tabs">
+
+	<!--Tabs -->
+	<div class="sign-in-form">
+
+
+		<div
+			class="popup-tabs-container">
+
+			<!-- Tab -->
+			<div
+				class="popup-tab-content" id="tab">
+
+				<!-- Welcome Text -->
+				<div class="welcome-text">
+					<h3>Nouveau contact</h3>
+				</div>
+
+				<!-- Form -->
+				<form action="{{ path('contactInfo',{'idN': entreprise.getNationalite.getId })}}" method="POST" id="add-note">
+
+					<div class="col-xl-12">
+						<div class="submit-field">
+							<h5>Nom Prénom</h5>
+							<input type="text" class="with-border" name="responsable" placeholder="Nom Complet" required/>
+						</div>
+					</div>
+
+					<div class="col-xl-12">
+						<div class="submit-field">
+						<h5>Position</h5>
+							<select class="selectpicker with-border" name="post" data-size="5" title="Sélectionner un position" required/>
+								<option>Admin Support</option>
+								<option>Customer Service</option>
+								<option>Data Analytics</option>
+								<option>Design & Creative</option>
+								<option>Legal</option>
+								<option>Software Developing</option>
+								<option>IT & Networking</option>
+								<option>Writing</option>
+								<option>Translation</option>
+								<option>Sales & Marketing</option>
+								<option>Autre</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col-xl-12">
+						<div class="submit-field">
+							<h5>Email</h5>
+							<input type="email" class="with-border" name="email" placeholder="Adresse Email" required/>
+						</div>
+					</div>
+
+					<div class="col-xl-12">
+						<div class="submit-field">
+							<h5>Téléphone 1</h5>
+							<input type="tel" class="with-border" name="tele" placeholder="Numéro de téléphone 1" required/>
+						</div>
+					</div>
+
+					<div class="col-xl-12">
+						<div class="submit-field">
+							<h5>Téléphone 2</h5>
+							<input type="tel" class="with-border" name="tele2" placeholder="Numéro de téléphone 2"/>
+						</div>
+					</div>
+					
+				</form>
+
+				<button class="button full-width button-sliding-icon ripple-effect" type="submit" form="add-note">Ajouter<i class="icon-material-outline-arrow-right-alt"></i>
+				</button>
+
+			</div>
+
+		</div>
+	</div>
+</div>
+<div class="margin-top-70"></div>
+<!-- Apply for a job popup / End -->{% endblock %}

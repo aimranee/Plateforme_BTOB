@@ -1,0 +1,88 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Mes commentaires{% endblock %}
+
+{% block body %}
+<!-- Dashboard Headline -->
+            <div class="dashboard-headline">
+                <h3>Gestion des préstations</h3>
+                <!-- Breadcrumbs -->
+                <nav id="breadcrumbs" class="dark">
+                    <ul>
+                        <li><a href="#">Acceuil</a></li>
+                        <li>Mes préstations</li>
+                    </ul>
+                </nav>
+            </div>
+    
+            <!-- Row -->
+            <div class="row">
+
+                <!-- Dashboard Box -->
+                <div class="col-xl-12">
+                    <div class="dashboard-box margin-top-0">
+                        <!-- Headline -->
+                        <div class="headline">
+                            <h3><i class="icon-material-outline-business"></i> Mes commentaires</h3>
+                        </div>
+                        <div class="content">
+                            <ul class="dashboard-box-list">
+                                {% for commentaire in commentaires %}
+                                <li>
+                                    <div class="boxed-list-item">
+                                        <!-- Content -->
+                                        <div class="item-content">
+                                            <h4>{{commentaire.object}} <span>{{ commentaire.utilisateur.nom }} {{ commentaire.utilisateur.prenom }}</span></h4>
+                                            <div class="item-details margin-top-10">
+                                                {% if commentaire.nbretoile == 0 %}
+                                                <div class="star-rating" data-rating="1.0"></div>
+                                                {% else %}
+                                                <div class="star-rating" data-rating="{{ commentaire.nbretoile }}.0"></div>
+                                                {% endif %}
+                                                <div class="detail-item"><i class="icon-material-outline-date-range"></i>{{ commentaire.createdAt|format_datetime(locale='fr') }} </div>
+                                            </div>
+                                            <div class="item-description">
+                                                <p>{{ commentaire.description|raw }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    
+                                    <!-- <a href="#small-dialog-2" class="popup-with-zoom-anim button blue ripple-effect margin-top-5 margin-right-5 margin-bottom-10">
+                                        <i class="icon-feather-edit"></i> Modifier
+                                    </a> -->
+                                   
+                                    <a href="{{ path('supprimerCommentaire', {'idcommentaire': commentaire.id })}}" class="button red ripple-effect margin-top-5 margin-bottom-10">
+                                        <i class="icon-material-outline-highlight-off"></i>Supprimer
+                                    </a> 
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <!-- <div class="clearfix"></div>
+                    <div class="pagination-container margin-top-40 margin-bottom-0">
+                        <nav class="pagination">
+                            <ul>
+                                <li><a href="#" class="ripple-effect current-page">1</a></li>
+                                <li><a href="#" class="ripple-effect">2</a></li>
+                                <li><a href="#" class="ripple-effect">3</a></li>
+                                <li class="pagination-arrow"><a href="#" class="ripple-effect"><i class="icon-material-outline-keyboard-arrow-right"></i></a></li>
+                            </ul>
+                        </nav>
+                    </div> -->
+                    <div class="clearfix"></div>
+                    <!-- Pagination / End -->
+
+                </div>
+
+                
+
+            </div>
+            <!-- Row / End -->
+
+
+{% endblock %}

@@ -1,0 +1,187 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<div class="dashboard-content-inner" >
+	<div class="col-xl-6 offset-xl-3">
+		<div class="dashboard-box main-box-in-row">
+
+			<div class="headline">
+				<h3>
+					<i class="icon-material-outline-note-add"></i>
+					Les attachements d'entreprise</h3>
+			</div>
+		</div>
+	</div>
+	<form action="{{ path('attachement', {'idma': id,'idN': idN }) }}" method="POST" enctype="multipart/form-data">
+		<div class="col-xl-6 offset-xl-3">
+			<div class="dashboard-box">
+
+				<!-- Headline -->
+				<div class="headline">
+					<h3><i class="icon-feather-file-text"></i> Forme legale</h3>
+				</div>
+
+				<div class="content ">
+					<ul class="fields-ul">
+						<li>
+							<div class="row">
+								
+								<div class="col-xl-10">
+									<div class="submit-field">
+										<!-- Attachments -->
+										<div class="col-xl-16">
+
+											<select name ="formeLegale" class="selectpicker" title="Sélectionner un forme legale" data-live-search="true" data-size="5" >
+												{% for formeLegaleMa in formeLegaleMas %}
+													<option value = "{{formeLegaleMa.id}}">({{formeLegaleMa.abreviation}})      {{formeLegaleMa.libelle}}</option>
+												{% endfor %}
+											</select>
+										</div>
+
+										<div class="clearfix"></div>
+
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>	
+				</div>  
+			</div>
+		</div> 
+
+		<div class="col-xl-6 offset-xl-3">
+			<div class="dashboard-box">
+
+				<!-- Headline -->
+				<div class="headline">
+					<h3><i class="icon-feather-file-text"></i> Etats synthese</h3>
+				</div>
+
+				<div class="content ">
+					<ul class="fields-ul">
+						<li>
+							<div class="row">
+								
+								<div class="col-xl-10">
+									<div class="submit-field">
+
+										<div class="clearfix"></div>
+										
+										<!-- Upload Button -->
+										<div class="uploadButton margin-top-0">
+											<input class="uploadButton-input" name="etatsSynthese" type="file" accept="file/pdf" id="etatsSynthese" required/>
+											<label class="uploadButton-button ripple-effect" for="etatsSynthese">Upload Files</label>
+											<span class="uploadButton-file-name">Maximum file size: 10 MB (PDF)</span>
+										</div>
+
+										<div class="dates">
+											<h5>Année de l'etats synthese</h5>
+											<input name="date1" placeholder="Année" pattern="[\d]{4}" type="text" autocomplete="off" id="date-picker-example" class="form-control" required/>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>	
+				</div>  
+			</div>
+		</div>
+
+		<div class="col-xl-6 offset-xl-3">
+			<div class="dashboard-box">
+
+				<!-- Headline -->
+				<div class="headline">
+					<h3><i class="icon-feather-file-text"></i> Fiche financiere</h3>
+				</div>
+
+				<div class="content ">
+					<ul class="fields-ul">
+						<li>
+							<div class="row">
+								
+								<div class="col-xl-10">
+									<div class="submit-field">
+
+										<div class="clearfix"></div>
+										
+										<div class="uploadButton1 margin-top-0">
+											<input class="uploadButton-input1" name="fichefinanciere" type="file" accept="pdf/*" id="fichefinanciere" required/>
+											<label class="uploadButton-button1 ripple-effect1" for="fichefinanciere">Upload Files</label>
+											<span class="uploadButton-file-name1" for="fichefinanciere">Maximum file size: 10 MB (PDF)</span>
+										</div>
+
+										<div class="dates">
+											<h5>Année de la fiche financiere</h5>
+											<input name="date2" placeholder="Année" pattern="[\d]{4}" type="text" autocomplete="off" id="date-picker-example" class="form-control" required/>
+										</div>
+
+										<div class="col-xl-16">
+
+											<select class="selectpicker with-border" name="typeF" title="Sélectionner le type fiche financiere" required>
+												<option>Détaillé</option>
+												<option>Simplifié</option>
+											</select>
+
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>	
+				</div>  
+			</div>
+		</div>
+
+		<div class="col-xl-6 offset-xl-3">
+			<div class="dashboard-box">
+
+				<!-- Headline -->
+				<div class="headline">
+					<h3><i class="icon-feather-file-text"></i> Statuts</h3>
+				</div>
+
+				<div class="content ">
+					<ul class="fields-ul">
+						<li>
+							<div class="row">
+								
+								<div class="col-xl-10">
+									<div class="submit-field">
+										
+										<div class="clearfix"></div>
+										
+										<div class="uploadButton2 margin-top-0">
+											<input class="uploadButton-input2" name="statutsMa" type="file" accept="pdf/*" id="statutsMa" required/>
+											<label class="uploadButton-button2 ripple-effect2" for="statutsMa">Upload Files</label>
+											<span class="uploadButton-file-name2" for="statutsMa">Maximum file size: 10 MB (PDF)</span>
+										</div>
+
+										<div class="dates">
+											<h5>Année de Statuts</h5>
+											<input name="date3" placeholder="Année" pattern="[\d]{4}" type="text" autocomplete="off" id="date-picker-example" class="form-control" required/>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>	
+				</div>  
+			</div>
+		</div>
+		<div class="col-xl-6 offset-xl-3">
+			<a > <button type="submit" class="button ripple-effect big margin-top-20">Valider
+				<i class="icon-material-outline-arrow-right-alt"></i>
+			</button></a>
+		</div>
+	</form>
+
+</div>
+<div class="margin-top-80"></div>
+
+{% endblock %}

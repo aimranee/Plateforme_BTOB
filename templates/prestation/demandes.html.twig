@@ -1,0 +1,96 @@
+{% extends 'base1.html.twig' %}
+{% block title %}Demandes|{{ prestation.titre }}{% endblock %}
+{% block body %}
+<!-- Dashboard Headline -->
+<div class="dashboard-headline">
+    <h3>Demandes</h3>
+    <span class="margin-top-7">de la prestation <a href="{{ path('prestationDetails', {'idprestation': prestation.id })}}">{{ prestation.titre }}</a></span>
+    <!-- Breadcrumbs -->
+    <nav id="breadcrumbs" class="dark">
+        <ul>
+            <li><a href="#">Acceuil</a></li>
+            <li><a href="{{ path('ListeDesPrestations')}}">Préstations</a></li>
+            <li>Demandes</li>
+        </ul>
+    </nav>
+</div>
+<!-- Row -->
+<div class="row">
+    <!-- Dashboard Box -->
+    <div class="col-xl-12">
+        <div class="dashboard-box margin-top-0">
+            <!-- Headline -->
+            {% set nombreDeDemandes = 0 %}
+            {% for demande in demandes %}
+                {% if demande.etat != "Refuser" %}
+                    {% set nombreDeDemandes = nombreDeDemandes + 1 %}
+                {% endif %}
+            {% endfor %}
+
+            
+            <div class="headline">
+                <h3><i class="icon-material-outline-supervisor-account"></i> {{ nombreDeDemandes }} Demandes</h3>
+            </div>
+
+            <div class="content">
+                <ul class="dashboard-box-list">
+                    {% for demande in demandes %}
+                    {% if demande.etat != "Refuser" %}
+                    
+                    <li>
+                        <!-- Overview -->
+                        <div class="freelancer-overview manage-candidates">
+                            <div class="freelancer-overview-inner">
+                                <!-- Avatar -->
+                                <div class="freelancer-avatar">
+                                    {% if demande.entreprise.pourcentageDesDonnes == 100 %}
+                                    <div class="verified-badge"></div>
+                                    {% endif %}
+                                    <a href="#"><img src="{{ asset('images/companyLogo/' ~ demande.entreprise.icon) }}" alt=""></a>
+                                </div>
+                                <!-- Name -->
+                                <div class="freelancer-name">
+                                    <h4><a href="#">{{demande.entreprise.nom}} 
+                                        {% if demande.entreprise.nationalite.libelle == "MA" %}
+                                        <img class="flag" src="{{ asset('images/flags/ma.svg') }}" alt="" title="Maroc" data-tippy-placement="top"></a>
+                                        {% else %}
+                                        <img class="flag" src="{{ asset('images/flags/fr.svg') }}" alt="" title="France" data-tippy-placement="top"></a>
+                                        {% endif %}
+                                    </h4>
+                                    <!-- Details -->
+                                    <span class="freelancer-detail-item"><a href="#"><i class="icon-line-awesome-suitcase"></i> {{demande.entreprise.siteWeb}}</a></span>
+                                    <!-- <span class="freelancer-detail-item"><i class="icon-feather-phone"></i> (+61) 123-456-789</span> -->
+                                    <!-- Rating -->
+                                    {% if demande.entreprise.evaluation >= 3 %}
+                                    <div class="freelancer-rating">
+                                        <div class="star-rating" data-rating="{{demande.entreprise.evaluation}}.0"></div>
+                                    </div>
+                                    {% else %}
+                                    <br>
+                                    <span class="company-not-rated">Minimum de 3 votes requis</span>
+                                    {% endif %}
+                                    <!-- Buttons -->
+                                    <div class="buttons-to-right always-visible margin-top-25 margin-bottom-5">
+                                        <a href="{{ path('demandeDétails', {'idDemande': demande.id })}}" class="button ripple-effect">
+                                            <i class="icon-feather-file-text"></i> Afficher la demande
+                                        </a>
+                                        <!-- <a href="#small-dialog" class="popup-with-zoom-anim button dark ripple-effect">
+                                            <i class="icon-feather-mail"></i> Envoyer un message
+                                        </a> -->
+                                        <a href="#" class="button gray ripple-effect ico" title="Supprimer la demande" data-tippy-placement="top">
+                                            <i class="icon-feather-trash-2"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Row / End -->
+{% endblock %}

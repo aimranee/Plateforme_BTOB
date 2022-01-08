@@ -1,0 +1,95 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Demande|{{prestation.titre}}{% endblock %}
+
+{% block body %}
+<br><br>
+<div class="container">
+<!-- Dashboard Headline -->
+<div class="dashboard-headline">
+    <h3>Nouvelle Demande</h3>
+    <!-- Breadcrumbs -->
+    <nav id="breadcrumbs" class="dark">
+        <ul>
+            <li><a href="#">Acceuil</a></li>
+            <li><a href="{{ path('toutesprestations')}}">Préstations</a></li>
+            <li><a href="{{ path('prestationAfficherDetails', {'idprestation': prestation.id })}}">{{prestation.titre}}</a></li>
+            <li>Postuler une demande</li>
+        </ul>
+    </nav>
+</div>
+<!-- Row -->
+<form action="{{path('postulerDemandeSubmission')}}" method="POST" enctype="multipart/form-data">
+<div class="row">
+    <!-- Dashboard Box -->
+    <div class="col-xl-12">
+        <div class="dashboard-box margin-top-0">
+
+            <!-- Headline -->
+            <div class="headline">
+                <h3><i class="icon-feather-folder-plus"></i>{{prestation.titre}}</h3>
+            </div>
+
+            <div class="content with-padding padding-bottom-10">
+                <div class="row">
+                     <div class="col-xl-12">
+                        <div class="submit-field">
+                            <h5>Titre</h5>
+                            <input required type="text" name="titre" id="titre" class="form-control required" placeholder="e.g. Construisez-moi un site Web">
+                            <input type="hidden" name="prestationId" value="{{prestation.id}}">
+                           <!--  <p id="validationTitre" style="color: #d9534f;display: none">Merci de saisir titre de prestation</p> -->
+                        </div>
+                    </div>
+                    <div class="col-xl-12">
+                        <div class="submit-field">
+                            <h5>Description</h5>
+                            <textarea required name="description" cols="30" rows="10" class="with-border"></textarea>
+                            <div class="uploadButton margin-top-30">
+                                <input class="uploadButton-input" name="attachementDeamnde" type="file" accept="application/pdf" id="upload"/>
+                                <label class="uploadButton-button ripple-effect" for="upload">Importer</label>
+                                <span class="uploadButton-file-name">Choisir un document qui pourrait être utile pour décrire votre projet</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-8">
+            <!-- <button  ><i class="icon-feather-plus"></i> </button> -->
+            <input class="button ripple-effect big margin-top-30" type="submit" value="Publier la préstation">
+        </div>
+
+    </div>
+    </form>
+    <br>
+    </div>
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.14.0/jquery.validate.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
+
+    <script>
+    $(document).ready(function() {
+        $("#ajouterPrestation").validate();        
+        // $("#ajouterPrestation").validate({
+        //     rules: {
+        //         titre:{
+        //             required:true,
+        //             minlength: 10
+        //         }
+        //     },
+        //     messages: {
+        //         titre:{
+        //             required:"Merci de saisir un titre",
+        //             minlength: "Votre titre doit comprendre au moins 10 caractères"
+        //         }
+        //     }
+        // });
+    });
+</script>
+    <!-- Row / End -->
+
+{% endblock %}

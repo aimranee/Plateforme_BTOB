@@ -1,0 +1,119 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<!-- Dashboard Content
+					================================================== -->
+
+	<div
+		class="dashboard-content-inner">
+
+		<!-- Dashboard Headline -->
+		<div class="dashboard-headline">
+			<h3>Créer votre entreprise</h3>
+
+			<!-- Breadcrumbs -->
+			<nav id="breadcrumbs" class="dark">
+				<ul>
+					<li>
+						<a href="#">Acceuil</a>
+					</li>
+					<li>
+						<a href="#">Profile</a>
+					</li>
+					<li>Créer</li>
+				</ul>
+			</nav>
+		</div>
+
+		<!-- Row -->
+		<div
+			class="row">
+
+			<!-- Dashboard Box -->
+			<div class="col-xl-5 offset-xl-3">
+				<form action="{{ path('entrepriseInfo')}}" method="POST" enctype="multipart/form-data">
+					<div
+						class="dashboard-box margin-top-0">
+
+						<!-- Headline -->
+						<div class="headline">
+							<h3>
+								<i class="icon-feather-folder-plus"></i>
+								Informations générales de l'entreprise</h3>
+						</div>
+
+						<div class="content with-padding padding-bottom-10">
+
+							<div class="col-xl-12">
+								<!-- Account Type -->
+								<div class="submit-field">
+									<h5>Type compte</h5>
+									<div class="account-type">
+										<div>
+											<input type="radio" name="typeCompte" value="Prestateur" id="freelancer-radio" class="account-type-radio" checked/>
+											<label for="freelancer-radio" class="ripple-effect-dark"><i class="icon-material-outline-account-circle"></i> Prestateur</label>
+										</div>
+
+										<div>
+											<input type="radio" name="typeCompte" value="Demandeur" id="employer-radio" class="account-type-radio"/>
+											<label for="employer-radio" class="ripple-effect-dark"><i class="icon-material-outline-business-center"></i> Demandeur</label>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="col-xl-12">
+								<div class="submit-field">
+									<h5>Nom</h5>
+									<input type="text" class="with-border" name="nom" placeholder="ex: marrakech-telecome" required/>
+								</div>
+							</div>
+
+							<div class="col-xl-12">
+								<div class="submit-field">
+									<h5>Site Web</h5>
+									<input type="url" class="with-border" name="siteWeb" pattern="https?://.+" title="Include http://" placeholder="www.exemple.com" required/>
+								</div>
+							</div>
+
+							<div class="col-xl-12">
+								<div class="submit-field">
+									<h5>Pays</h5>
+									<select class="selectpicker with-border" name="nationalite" title="Sélectionner un pays" required>
+										<option>Maroc</option>
+										<option>France</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="col-xl-12">
+								<div class="submit-field">
+									<h5>Description</h5>
+									<textarea cols="30" class="with-border" name="description" required></textarea>
+
+									<div class="uploadButton margin-top-30">
+									
+										<input class="uploadButton-input" type="file" name="icon" accept=" image/*" id="upload" required/>
+										<label class="uploadButton-button ripple-effect" for="upload">Import Icon</label>
+										<span class="uploadButton-file-name">Icon de l'entreprise format (JPG, JPEG, PNG)</span>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button class="button ripple-effect big margin-top-30" type="submit" type="submit">Valider
+						<i class="icon-material-outline-arrow-right-alt"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+
+
+	</div>
+	<!-- Row / End -->
+</div>
+<!-- Spacer -->
+<div class="margin-top-70"></div>
+<!-- Spacer / End-->{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+{% block title %}Parcourir les entreprises{% endblock %}
+{% block body %}
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+<!-- Titlebar
+================================================== -->
+<div id="titlebar" class="gradient">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Parcourir les entreprises</h2>
+				<!-- Breadcrumbs -->
+				<nav id="breadcrumbs" class="dark">
+					<ul>
+						<li><a href="{{ path('acceuil') }}">Acceuil</a></li>
+						<li>Parcourir les entreprises</li>
+					</ul>
+				</nav>
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Page Content
+================================================== -->
+<div class="container">
+	<div class="row">
+		<!-- <div class="col-xl-12">
+			<div class="letters-list">
+				<a href="#" class="current">A</a>
+				<a href="#">B</a>
+				<a href="#">C</a>
+				<a href="#">D</a>
+				<a href="#">E</a>
+				<a href="#">F</a>
+				<a href="#">G</a>
+				<a href="#">H</a>
+				<a href="#">I</a>
+				<a href="#">J</a>
+				<a href="#">K</a>
+				<a href="#">L</a>
+				<a href="#">M</a>
+				<a href="#">N</a>
+				<a href="#">O</a>
+				<a href="#">P</a>
+				<a href="#">Q</a>
+				<a href="#">R</a>
+				<a href="#">S</a>
+				<a href="#">T</a>
+				<a href="#">U</a>
+				<a href="#">V</a>
+				<a href="#">W</a>
+				<a href="#">X</a>
+				<a href="#">Y</a>
+				<a href="#">Z</a>
+			</div>
+		</div> -->
+		<div class="col-xl-12">
+			<div class="companies-list">
+				{% for entreprise in entreprises %}
+				<a href="{{ path('entrepriseDetails', {'idEntreprise': entreprise.id })}}" class="company">
+					<div class="company-inner-alignment">
+						<span class="company-logo">
+							<img src="{{ asset('images/companyLogo/' ~ entreprise.icon) }}" alt="">
+						</span>
+						<h4>{{ entreprise.nom }}</h4>
+						{% if entreprise.evaluation >= 3 %}
+						<div class="star-rating" data-rating="{{entreprise.evaluation}}.0"></div>
+						{% else %}
+						<span class="company-not-rated">Minimum de 3 votes requis</span>
+						{% endif %}
+					</div>
+				</a>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+<!-- Spacer -->
+<div class="margin-top-70"></div>
+<!-- Spacer / End-->
+
+{% endblock %}

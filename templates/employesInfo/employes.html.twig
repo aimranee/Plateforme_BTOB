@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<!-- Dashboard Content
+				================================================== -->
+	
+		<div class="dashboard-content-inner">
+
+			<!-- Dashboard Headline -->
+			<div class="dashboard-headline">
+				<h3>Créer votre entreprise</h3>
+
+				<!-- Breadcrumbs -->
+				<nav id="breadcrumbs" class="dark">
+					<ul>
+						<li>
+							<a href="#">Acceuil</a>
+						</li>
+						<li>
+							<a href="#">Profile</a>
+						</li>
+						<li>Créer</li>
+					</ul>
+				</nav>
+			</div>
+
+			<!-- Row -->
+
+				<!-- Dashboard Box -->
+			<div class="col-xl-5 offset-xl-3">
+			<form action="{{ path('employesInfoo',{'idN': idN })}}" method="POST" enctype="multipart/form-data">
+				<div class="dashboard-box margin-top-0">
+
+							<!-- Headline -->
+					<div class="headline">
+						<h3>
+						<i class="icon-feather-folder-plus"></i>
+						Nombre des employes pour chaque niveau</h3>
+					</div>
+
+					<div class="content with-padding padding-bottom-10">
+
+						<div class="col-xl-12">
+							<div class="submit-field">
+								<h5>> Bac+ 5</h5>
+								<input type="number" min="0" value="0" class="with-border" name="plusBacPlus5" placeholder=">=Bac+5" required/>
+							</div>
+						</div>
+
+						<div class="col-xl-12">
+							<div class="submit-field">
+								<h5>Bac+ 5</h5>
+								<input type="number" min="0" value="0" class="with-border" name="bacPlus5" placeholder=">=Bac+5" required/>
+							</div>
+						</div>
+
+						<div class="col-xl-12">
+							<div class="submit-field">
+								<h5>Bac+ 4</h5>	
+								<input type="number" min="0" value="0" class="with-border" name="bacPlus4" placeholder="Bac+4" required/>
+							</div>
+						</div>
+
+						<div class="col-xl-12">
+							<div class="submit-field">
+								<h5>Bac+ 3</h5>	
+								<input type="number" min="0" value="0" class="with-border" name="bacPlus3" placeholder="bac+3" required/>
+							</div>
+						</div>
+
+						<div class="col-xl-12">
+							<div class="submit-field">
+								<h5>Bac+ 2</h5>	
+								<input type="number" min="0" value="0" class="with-border" name="bacPlus2" placeholder="Bac+2" required/>
+							</div>
+						</div>
+
+						<div class="col-xl-12">
+							<div class="submit-field">
+								<h5><= Bac</h5>	
+								<input type="number" min="0" value="0" class="with-border" name="bacOuMoin" placeholder="<=Bac" required/>
+							</div>
+						</div>
+					</div>
+				</div>
+				<button class="button ripple-effect big margin-top-30" type="submit">Valider
+					<i class="icon-material-outline-arrow-right-alt"></i>
+				</button>
+			</form>
+		</div>
+	</div>
+	<!-- Row / End -->
+<!-- Spacer -->
+<div class="margin-top-70"></div>
+<!-- Spacer / End-->{% endblock %}
